@@ -2,21 +2,19 @@ name: CICD
 on: push
 jobs:
 
-#ContinousINtegration
+ build:
+   runs-on: ubuntu-latest
+   steps:
+     -name: Checkout
+      uses: actions/checkout@v1
 
-  build:
-    runs-on: ubuntu-latest
-    steps:
-      -name: Checkout
-       uses: actions/checkout@v1
+     -name: Setup Node
+      uses: actions/setup-node@v1
+      with:
+        node-version: 13.x
 
-      -name: Setup Node
-       uses: actions/setup-node@v1
-       with:
-         node-version: 13.x
+     -name: Install Dependencies
+      run: npm i
 
-      -name: Install Dependencies
-       run: npm i
-
-      -name: Build the code
-       run: npm run build
+     -name: Build the code
+      run: npm run build
